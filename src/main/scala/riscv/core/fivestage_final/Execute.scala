@@ -29,6 +29,7 @@ class Execute extends Module {
   val opcode = io.instruction(6, 0)
   val funct3 = io.instruction(14, 12)
   val funct7 = io.instruction(31, 25)
+  val rs2_or_shamt = io.instruction(24,20) // +++
   val uimm   = io.instruction(19, 15)
 
   val alu      = Module(new ALU)
@@ -37,6 +38,7 @@ class Execute extends Module {
   alu_ctrl.io.opcode := opcode
   alu_ctrl.io.funct3 := funct3
   alu_ctrl.io.funct7 := funct7
+  alu_ctrl.io.rs2_or_shamt := rs2_or_shamt // +++
   alu.io.func        := alu_ctrl.io.alu_funct
 
   val reg1_data = MuxLookup(

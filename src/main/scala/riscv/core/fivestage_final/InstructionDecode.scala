@@ -154,10 +154,10 @@ class InstructionDecode extends Module {
   val funct7 = io.instruction(31, 25)
   val rd     = io.instruction(11, 7)
   val rs1    = io.instruction(19, 15)
-  val rs2    = io.instruction(24, 20)
+  val rs2_or_shamt    = io.instruction(24, 20)
 
   io.regs_reg1_read_address := Mux(opcode === Instructions.lui, 0.U(Parameters.PhysicalRegisterAddrWidth), rs1)
-  io.regs_reg2_read_address := rs2
+  io.regs_reg2_read_address := rs2_or_shamt
   io.ex_immediate := MuxLookup(
     opcode,
     Cat(Fill(20, io.instruction(31)), io.instruction(31, 20)),

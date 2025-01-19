@@ -12,6 +12,7 @@ class ALUControl extends Module {
     val opcode = Input(UInt(7.W))
     val funct3 = Input(UInt(3.W))
     val funct7 = Input(UInt(7.W))
+    val rs2_or_shamt = Input(UInt(5.W))
 
     val alu_funct = Output(ALUFunctions())
   })
