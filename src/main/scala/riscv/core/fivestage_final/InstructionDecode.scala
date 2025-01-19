@@ -39,8 +39,6 @@ object InstructionsTypeI {
   val sri   = 5.U
   val ori   = 6.U
   val andi  = 7.U
-
-  val clz = "b001".U
 }
 
 object InstructionsTypeS {
@@ -122,7 +120,6 @@ object RegWriteSource {
 
 class InstructionDecode extends Module {
   val io = IO(new Bundle {
-    // input
     val instruction               = Input(UInt(Parameters.InstructionWidth))
     val instruction_address       = Input(UInt(Parameters.AddrWidth)) // if2id.io.output_instruction_address
     val reg1_data                 = Input(UInt(Parameters.DataWidth)) // regs.io.read_data1
@@ -133,7 +130,7 @@ class InstructionDecode extends Module {
     val reg2_forward              = Input(UInt(2.W))                  // forwarding.io.reg2_forward_id
     val interrupt_assert          = Input(Bool())                     // clint.io.id_interrupt_assert
     val interrupt_handler_address = Input(UInt(Parameters.AddrWidth)) // clint.io.id_interrupt_handler_address
-    // output
+
     val regs_reg1_read_address = Output(UInt(Parameters.PhysicalRegisterAddrWidth))
     val regs_reg2_read_address = Output(UInt(Parameters.PhysicalRegisterAddrWidth))
     val ex_immediate           = Output(UInt(Parameters.DataWidth))
@@ -155,14 +152,12 @@ class InstructionDecode extends Module {
   val opcode = io.instruction(6, 0)
   val funct3 = io.instruction(14, 12)
   val funct7 = io.instruction(31, 25)
-  val rd = io.instruction(11, 7)
-  val rs1 = io.instruction(19, 15)
-  val rs2_or_shamt = io.instruction(24, 20)
+  val rd     = io.instruction(11, 7)
+  val rs1    = io.instruction(19, 15)
+  val rs2    = io.instruction(24, 20)
 
   io.regs_reg1_read_address := Mux(opcode === Instructions.lui, 0.U(Parameters.PhysicalRegisterAddrWidth), rs1)
-  io.regs_reg2_read_address := rs2_or_shamt
-
-  // MuxLookup(條件, default value, case)
+  io.regs_reg2_read_address := rs2
   io.ex_immediate := MuxLookup(
     opcode,
     Cat(Fill(20, io.instruction(31)), io.instruction(31, 20)),
@@ -189,19 +184,16 @@ class InstructionDecode extends Module {
       )
     )
   )
-
   io.ex_aluop1_source := Mux(
     opcode === Instructions.auipc || opcode === InstructionTypes.B || opcode === Instructions.jal,
     ALUOp1Source.InstructionAddress,
     ALUOp1Source.Register
   )
-
   io.ex_aluop2_source := Mux(
     opcode === InstructionTypes.RM,
     ALUOp2Source.Register,
     ALUOp2Source.Immediate
   )
-
   io.ex_memory_read_enable  := opcode === InstructionTypes.L
   io.ex_memory_write_enable := opcode === InstructionTypes.S
   io.ex_reg_write_source := MuxLookup(
@@ -214,7 +206,6 @@ class InstructionDecode extends Module {
       Instructions.jalr  -> RegWriteSource.NextInstructionAddress
     )
   )
-
   io.ex_reg_write_enable := (opcode === InstructionTypes.RM) || (opcode === InstructionTypes.I) ||
     (opcode === InstructionTypes.L) || (opcode === Instructions.auipc) || (opcode === Instructions.lui) ||
     (opcode === Instructions.jal) || (opcode === Instructions.jalr) || (opcode === Instructions.csr)
@@ -235,7 +226,6 @@ class InstructionDecode extends Module {
       ForwardingType.ForwardFromMEM -> (io.forward_from_mem)
     )
   )
-
   val reg2_data = MuxLookup(
     io.reg2_forward,
     0.U,
@@ -245,7 +235,6 @@ class InstructionDecode extends Module {
       ForwardingType.ForwardFromMEM -> (io.forward_from_mem)
     )
   )
-
   io.ctrl_jump_instruction := opcode === Instructions.jal ||
     (opcode === Instructions.jalr) ||
     (opcode === InstructionTypes.B)
