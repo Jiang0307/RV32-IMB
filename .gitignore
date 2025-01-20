@@ -1,2 +1,4 @@
 project/
 target/
+verilog/
+test_run_dir/
