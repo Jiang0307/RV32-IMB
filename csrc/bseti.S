@@ -1,9 +1,10 @@
 .globl _start
 _start:
-  li a0, 0x4
-  li t0, 0xDEADBEEF
-  sb t0, 0(a0)
-  lw t1, 0(a0)
-  li s2, 0x15
-  sb s2, 1(a0)
-  lw ra, 0(a0)
+  li t0, 0x2
+  bseti t0, t0, 0
+
+  li t1, 0x0
+  bseti t1, t1, 8
+
+  li t2, 0x3
+  bseti t2, t2, 2
