@@ -6,7 +6,7 @@ import chisel3.util._
 import riscv.Parameters
 
 object ALUFunctions extends ChiselEnum {
-  val zero, add, sub, sll, slt, xor, or, and, srl, sra, sltu = Value
+  val zero, add, sub, sll, slt, xor, or, and, srl, sra, sltu, clz, ctz, cpop, sextb, sexth = Value
 }
 
 class ALU extends Module {
@@ -50,6 +50,21 @@ class ALU extends Module {
     }
     is(ALUFunctions.sltu) {
       io.result := io.op1 < io.op2
+    }
+    is(ALUFunctions.clz) {
+      io.result := PriorityEncoder(Reverse(io.op1))
+    }
+    is(ALUFunctions.ctz) {
+      io.result := PriorityEncoder(io.op1)
+    }
+    is(ALUFunctions.cpop) {
+      io.result := PopCount(io.op1)
+    }
+    is(ALUFunctions.sextb) {
+      io.result := io.op1(7, 0).asSInt.asUInt
+    }
+    is(ALUFunctions.sexth) {
+      io.result := io.op1(15, 0).asSInt.asUInt
     }
   }
 }

@@ -4,6 +4,7 @@ import chisel3._
 import chisel3.util._
 import riscv.Parameters
 
+//opcode
 object InstructionTypes {
   val L  = "b0000011".U
   val I  = "b0010011".U
@@ -12,6 +13,7 @@ object InstructionTypes {
   val B  = "b1100011".U
 }
 
+//opcode
 object Instructions {
   val lui   = "b0110111".U
   val nop   = "b0000001".U
@@ -22,6 +24,7 @@ object Instructions {
   val fence = "b0001111".U
 }
 
+//funct3
 object InstructionsTypeL {
   val lb  = "b000".U
   val lh  = "b001".U
@@ -30,23 +33,54 @@ object InstructionsTypeL {
   val lhu = "b101".U
 }
 
+//funct3
 object InstructionsTypeI {
   val addi  = 0.U
-  val slli  = 1.U
+  val slli_and_other  = 1.U //
   val slti  = 2.U
   val sltiu = 3.U
   val xori  = 4.U
-  val sri   = 5.U
+  val sri_and_other   = 5.U //
   val ori   = 6.U
   val andi  = 7.U
 }
 
+//funct7
+object InstructionsTypeI_funct3is1_funct7 {
+  val slli  = "b0000000".U
+  val bseti = "b0010100".U
+  val bclri = "b0100100".U
+  val binvi = "b0110100".U
+  val other = "b0110000".U 
+}
+
+//funct7
+object InstructionsTypeI_funct3is5_funct7 {
+  val srli  = "b0000000".U
+  val srai  = "b0100000".U
+  val bexti = "b0100100".U
+  val rori  = "b0110000".U
+  val orcb  = "b0010100".U
+  val rev8  = "b0110100".U
+}
+
+//shamt
+object InstructionsTypeI_funct3is1_funct7is48_shamt {
+  val clz   = "b00000".U
+  val ctz   = "b00001".U
+  val cpop  = "b00010".U
+  val sextb = "b00100".U
+  val sexth = "b00101".U
+}
+
+//funct3
 object InstructionsTypeS {
   val sb = "b000".U
   val sh = "b001".U
   val sw = "b010".U
 }
 
+//funct3
 object InstructionsTypeR {
   val add_sub = 0.U
   val sll     = 1.U
@@ -58,6 +92,7 @@ object InstructionsTypeR {
   val and     = 7.U
 }
 
+//funct3
 object InstructionsTypeM {
   val mul    = 0.U
   val mulh   = 1.U
@@ -69,6 +104,7 @@ object InstructionsTypeM {
   val remu   = 7.U
 }
 
+//funct3
 object InstructionsTypeB {
   val beq  = "b000".U
   val bne  = "b001".U
@@ -78,6 +114,7 @@ object InstructionsTypeB {
   val bgeu = "b111".U
 }
 
+//funct3
 object InstructionsTypeCSR {
   val csrrw  = "b001".U
   val csrrs  = "b010".U

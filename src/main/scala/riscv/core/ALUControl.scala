@@ -6,6 +6,9 @@ import riscv.core.fivestage_final.InstructionTypes
 import riscv.core.fivestage_final.Instructions
 import riscv.core.fivestage_final.InstructionsTypeI
 import riscv.core.fivestage_final.InstructionsTypeR
+import riscv.core.fivestage_final.InstructionsTypeI_funct3is1_funct7
+import riscv.core.fivestage_final.InstructionsTypeI_funct3is5_funct7
+import riscv.core.fivestage_final.InstructionsTypeI_funct3is1_funct7is48_shamt
 
 class ALUControl extends Module {
   val io = IO(new Bundle {
@@ -18,7 +21,7 @@ class ALUControl extends Module {
   })
 
   io.alu_funct := ALUFunctions.zero
-  val temp = io.rs2_or_shamt
+  //val temp = io.rs2_or_shamt
 
   switch(io.opcode) {
     is(InstructionTypes.I) {
@@ -27,13 +30,44 @@ class ALUControl extends Module {
         ALUFunctions.zero,
         IndexedSeq(
           InstructionsTypeI.addi  -> ALUFunctions.add,
-          InstructionsTypeI.slli  -> ALUFunctions.sll,
           InstructionsTypeI.slti  -> ALUFunctions.slt,
           InstructionsTypeI.sltiu -> ALUFunctions.sltu,
           InstructionsTypeI.xori  -> ALUFunctions.xor,
           InstructionsTypeI.ori   -> ALUFunctions.or,
           InstructionsTypeI.andi  -> ALUFunctions.and,
-          InstructionsTypeI.sri   -> Mux(io.funct7(5), ALUFunctions.sra, ALUFunctions.srl)
+          InstructionsTypeI.slli_and_other  -> MuxLookup(
+            io.funct7,
+            ALUFunctions.zero,
+            IndexedSeq(
+              InstructionsTypeI_funct3is1_funct7.slli  -> ALUFunctions.sll,
+              InstructionsTypeI_funct3is1_funct7.bseti -> ALUFunctions.zero,
+              InstructionsTypeI_funct3is1_funct7.bclri -> ALUFunctions.zero,
+              InstructionsTypeI_funct3is1_funct7.binvi -> ALUFunctions.zero,
+              InstructionsTypeI_funct3is1_funct7.other -> MuxLookup(
+                io.rs2_or_shamt,
+                ALUFunctions.zero,
+                IndexedSeq(
+                  InstructionsTypeI_funct3is1_funct7is48_shamt.clz   -> ALUFunctions.clz,
+                  InstructionsTypeI_funct3is1_funct7is48_shamt.ctz   -> ALUFunctions.ctz,
+                  InstructionsTypeI_funct3is1_funct7is48_shamt.cpop  -> ALUFunctions.cpop,
+                  InstructionsTypeI_funct3is1_funct7is48_shamt.sextb   -> ALUFunctions.sextb,
+                  InstructionsTypeI_funct3is1_funct7is48_shamt.sexth   -> ALUFunctions.sexth
+                )
+              )
+            )
+          ),
+          InstructionsTypeI.sri_and_other   -> MuxLookup(
+            io.funct7,
+            ALUFunctions.zero,
+            IndexedSeq(
+              InstructionsTypeI_funct3is5_funct7.srli -> ALUFunctions.srl,
+              InstructionsTypeI_funct3is5_funct7.srai -> ALUFunctions.sra,
+              InstructionsTypeI_funct3is5_funct7.bexti -> ALUFunctions.zero,
+              InstructionsTypeI_funct3is5_funct7.rori -> ALUFunctions.zero,
+              InstructionsTypeI_funct3is5_funct7.orcb -> ALUFunctions.zero,
+              InstructionsTypeI_funct3is5_funct7.rev8 -> ALUFunctions.zero,
+            )
+          )
         ),
       )
     }
