@@ -1,7 +1,7 @@
 CROSS_COMPILE ?= riscv-none-elf-
 
-ASFLAGS = -march=rv32i_zicsr -mabi=ilp32
-CFLAGS = -O0 -Wall -march=rv32i_zicsr -mabi=ilp32
+ASFLAGS = -march=rv32i_zicsr_zbb_zbkb_zbkc_zbkx -mabi=ilp32
+CFLAGS = -O0 -Wall -march=rv32i_zicsr_zbb_zbkb_zbkc_zbkx -mabi=ilp32
 LDFLAGS = --oformat=elf32-littleriscv
 
 AS := $(CROSS_COMPILE)as
@@ -27,7 +27,8 @@ BINS = \
 	mmio.asmbin \
 	quicksort.asmbin \
 	sb.asmbin \
-	hazard.asmbin
+	hazard.asmbin\
+	clz.asmbin
 
 # Clear the .DEFAULT_GOAL special variable, so that the following turns
 # to the first target after .DEFAULT_GOAL is not set.
@@ -39,4 +40,4 @@ update: $(BINS)
 	cp -f $(BINS) ../src/main/resources
 
 clean:
-	$(RM) *.o *.elf *.asmbin
+	$(RM) *.o *.elf *.asmbin *.out
