@@ -40,9 +40,9 @@ class ALUControl extends Module {
             ALUFunctions.zero,
             IndexedSeq(
               InstructionsTypeI_funct3is1_funct7.slli  -> ALUFunctions.sll,
-              InstructionsTypeI_funct3is1_funct7.bseti -> ALUFunctions.zero,
-              InstructionsTypeI_funct3is1_funct7.bclri -> ALUFunctions.zero,
-              InstructionsTypeI_funct3is1_funct7.binvi -> ALUFunctions.zero,
+              InstructionsTypeI_funct3is1_funct7.bseti -> ALUFunctions.bseti,
+              InstructionsTypeI_funct3is1_funct7.bclri -> ALUFunctions.bclri,
+              InstructionsTypeI_funct3is1_funct7.binvi -> ALUFunctions.binvi,
               InstructionsTypeI_funct3is1_funct7.other -> MuxLookup(
                 io.rs2_or_shamt,
                 ALUFunctions.zero,
@@ -62,10 +62,10 @@ class ALUControl extends Module {
             IndexedSeq(
               InstructionsTypeI_funct3is5_funct7.srli -> ALUFunctions.srl,
               InstructionsTypeI_funct3is5_funct7.srai -> ALUFunctions.sra,
-              InstructionsTypeI_funct3is5_funct7.bexti -> ALUFunctions.zero,
-              InstructionsTypeI_funct3is5_funct7.rori -> ALUFunctions.zero,
-              InstructionsTypeI_funct3is5_funct7.orcb -> ALUFunctions.zero,
-              InstructionsTypeI_funct3is5_funct7.rev8 -> ALUFunctions.zero,
+              InstructionsTypeI_funct3is5_funct7.bexti -> ALUFunctions.bexti,
+              InstructionsTypeI_funct3is5_funct7.rori -> ALUFunctions.rori,
+              InstructionsTypeI_funct3is5_funct7.orcb -> ALUFunctions.orcb,
+              InstructionsTypeI_funct3is5_funct7.rev8 -> ALUFunctions.rev8,
             )
           )
         ),
