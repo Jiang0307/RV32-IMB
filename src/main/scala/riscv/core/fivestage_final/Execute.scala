@@ -39,7 +39,7 @@ class Execute extends Module {
   alu_ctrl.io.funct3 := funct3
   alu_ctrl.io.funct7 := funct7
   alu_ctrl.io.rs2_or_shamt := rs2_or_shamt // +++
-  alu.io.func        := alu_ctrl.io.alu_funct
+  alu.io.func := alu_ctrl.io.alu_funct
 
   val reg1_data = MuxLookup(
     io.reg1_forward,

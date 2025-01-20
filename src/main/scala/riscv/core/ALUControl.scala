@@ -2,10 +2,10 @@ package riscv.core
 
 import chisel3._
 import chisel3.util._
-import riscv.core.threestage.InstructionTypes
-import riscv.core.threestage.Instructions
-import riscv.core.threestage.InstructionsTypeI
-import riscv.core.threestage.InstructionsTypeR
+import riscv.core.fivestage_final.InstructionTypes
+import riscv.core.fivestage_final.Instructions
+import riscv.core.fivestage_final.InstructionsTypeI
+import riscv.core.fivestage_final.InstructionsTypeR
 
 class ALUControl extends Module {
   val io = IO(new Bundle {
@@ -18,6 +18,7 @@ class ALUControl extends Module {
   })
 
   io.alu_funct := ALUFunctions.zero
+  val temp = io.rs2_or_shamt
 
   switch(io.opcode) {
     is(InstructionTypes.I) {

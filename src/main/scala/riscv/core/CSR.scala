@@ -2,7 +2,7 @@ package riscv.core
 
 import chisel3._
 import chisel3.util._
-import riscv.core.threestage.CSRDirectAccessBundle
+import riscv.core.fivestage_final.CSRDirectAccessBundle
 import riscv.Parameters
 
 object CSRRegister {
