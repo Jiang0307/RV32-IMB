@@ -1,6 +1,6 @@
-int clz(int x) {
-
-    return (x)? clz(x>>1)-1 : 32;
+int clz(int x) 
+{
+    return __builtin_clz(x);
 }
 
 int main()
