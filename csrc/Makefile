@@ -32,7 +32,8 @@ BINS = \
 	hazard.asmbin\
 	clz.asmbin\
 	bseti.asmbin\
-	orcb.asmbin
+	orcb.asmbin\
+	rev8.asmbin
 
 # Clear the .DEFAULT_GOAL special variable, so that the following turns
 # to the first target after .DEFAULT_GOAL is not set.
