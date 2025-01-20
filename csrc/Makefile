@@ -1,5 +1,7 @@
 CROSS_COMPILE ?= riscv-none-elf-
 
+# ASFLAGS = -march=rv32i_zicsr -mabi=ilp32
+# CFLAGS = -O0 -Wall -march=rv32i_zicsr -mabi=ilp32
 ASFLAGS = -march=rv32i_zicsr_zbb_zbkb_zbkc_zbkx -mabi=ilp32
 CFLAGS = -O0 -Wall -march=rv32i_zicsr_zbb_zbkb_zbkc_zbkx -mabi=ilp32
 LDFLAGS = --oformat=elf32-littleriscv
