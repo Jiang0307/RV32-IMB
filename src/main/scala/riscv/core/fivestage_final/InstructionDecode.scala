@@ -73,9 +73,16 @@ object InstructionsTypeI_funct3is1_funct7is48_shamt {
   val sexth = "b00101".U
 }
 
-// zext.h
-object InstructionsTypeR_funct3is4_funct7is4_rs2 {
-  val zexth = "b00000".U
+//funct3
+object InstructionsTypeR {
+  val add_sub = 0.U
+  val sll_and_B_extension     = 1.U // ++
+  val slt_and_B_extension     = 2.U // +++
+  val sltu_and_B_extension    = 3.U // +++
+  val xor_and_B_extension     = 4.U // +++
+  val srl_sra_and_B_extension = 5.U // +++
+  val or_and_B_extension      = 6.U // +++
+  val and_and_B_extension     = 7.U // +++
 }
 
 // sll_and_B_extension
@@ -104,6 +111,7 @@ object InstructionsTypeR_funct3is3_funct7 {
 // xor_and_B_extension
 object InstructionsTypeR_funct3is4_funct7 {
   val xor    = "b0000000".U
+  val zexth  = "b0000100".U
   val min    = "b0000101".U
   val sh2add = "b0010000".U
   val xnor   = "b0100000".U
@@ -138,18 +146,6 @@ object InstructionsTypeS {
   val sb = "b000".U
   val sh = "b001".U
   val sw = "b010".U
-}
-
-//funct3
-object InstructionsTypeR {
-  val add_sub = 0.U
-  val sll_and_B_extension     = 1.U // ++
-  val slt_and_B_extension     = 2.U // +++
-  val sltu_and_B_extension    = 3.U // +++
-  val xor_and_B_extension     = 4.U // +++
-  val srl_sra_and_B_extension = 5.U // +++
-  val or_and_B_extension      = 6.U // +++
-  val and_and_B_extension     = 7.U // +++
 }
 
 //funct3
