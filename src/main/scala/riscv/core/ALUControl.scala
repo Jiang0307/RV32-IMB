@@ -35,7 +35,7 @@ class ALUControl extends Module {
           InstructionsTypeI.xori  -> ALUFunctions.xor,
           InstructionsTypeI.ori   -> ALUFunctions.or,
           InstructionsTypeI.andi  -> ALUFunctions.and,
-          InstructionsTypeI.slli_and_other  -> MuxLookup(
+          InstructionsTypeI.slli_and_B_extension  -> MuxLookup(
             io.funct7,
             ALUFunctions.zero,
             IndexedSeq(
@@ -56,7 +56,7 @@ class ALUControl extends Module {
               )
             )
           ),
-          InstructionsTypeI.sri_and_other   -> MuxLookup(
+          InstructionsTypeI.srli_and_B_extension   -> MuxLookup(
             io.funct7,
             ALUFunctions.zero,
             IndexedSeq(

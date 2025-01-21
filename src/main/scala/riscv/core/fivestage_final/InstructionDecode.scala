@@ -36,11 +36,11 @@ object InstructionsTypeL {
 //funct3
 object InstructionsTypeI {
   val addi  = 0.U
-  val slli_and_other  = 1.U //
+  val slli_and_B_extension  = 1.U //
   val slti  = 2.U
   val sltiu = 3.U
   val xori  = 4.U
-  val sri_and_other   = 5.U //
+  val srli_and_B_extension   = 5.U //
   val ori   = 6.U
   val andi  = 7.U
 }
