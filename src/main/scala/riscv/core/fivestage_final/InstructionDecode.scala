@@ -73,6 +73,52 @@ object InstructionsTypeI_funct3is1_funct7is48_shamt {
   val sexth = "b00101".U
 }
 
+// zext.h
+object InstructionsTypeR_funct3is4_funct7is4_rs2 {
+  val zexth = "b00000".U
+}
+
+// 
+object InstructionsTypeR_funct3is1_funct7 {
+  val clmul = "b0000101".U
+  val bset  = "b0010100".U
+  val bclr  = "b0100100".U
+  val rol   = "b0110000".U
+  val binv  = "b0110100".U
+}
+
+object InstructionsTypeR_funct3is2_funct7 {
+  val clmulr = "b0000101".U
+  val sh1add = "b0010000".U
+}
+
+object InstructionsTypeR_funct3is3_funct7 {
+  val clmulh = "b0000101"
+}
+
+object InstructionsTypeR_funct3is4_funct7 {
+  val min    = "b0000101".U
+  val sh2add = "b0010000".U
+  val xnor   = "b0100000".U
+}
+
+object InstructionsTypeR_funct3is5_funct7 {
+  val minu = "b0000101".U
+  val bext = "b0100100".U
+  val ror  = "b0110000".U
+}
+
+object InstructionsTypeR_funct3is6_funct7 {
+  val max     = "b0000101".U
+  val sh3add  = "b0010000".U
+  val orn     = "b0100000".U
+}
+
+object InstructionsTypeR_funct3is7_funct7 {
+  val maxu = "b0000101".U
+  val andn = "b0100000".U
+}
+
 //funct3
 object InstructionsTypeS {
   val sb = "b000".U
