@@ -50,8 +50,8 @@ class ALUControl extends Module {
                   InstructionsTypeI_funct3is1_funct7is48_shamt.clz   -> ALUFunctions.clz,
                   InstructionsTypeI_funct3is1_funct7is48_shamt.ctz   -> ALUFunctions.ctz,
                   InstructionsTypeI_funct3is1_funct7is48_shamt.cpop  -> ALUFunctions.cpop,
-                  InstructionsTypeI_funct3is1_funct7is48_shamt.sextb   -> ALUFunctions.sextb,
-                  InstructionsTypeI_funct3is1_funct7is48_shamt.sexth   -> ALUFunctions.sexth
+                  InstructionsTypeI_funct3is1_funct7is48_shamt.sextb -> ALUFunctions.sextb,
+                  InstructionsTypeI_funct3is1_funct7is48_shamt.sexth -> ALUFunctions.sexth
                 )
               )
             )
@@ -60,12 +60,12 @@ class ALUControl extends Module {
             io.funct7,
             ALUFunctions.zero,
             IndexedSeq(
-              InstructionsTypeI_funct3is5_funct7.srli -> ALUFunctions.srl,
-              InstructionsTypeI_funct3is5_funct7.srai -> ALUFunctions.sra,
+              InstructionsTypeI_funct3is5_funct7.srli  -> ALUFunctions.srl,
+              InstructionsTypeI_funct3is5_funct7.srai  -> ALUFunctions.sra,
               InstructionsTypeI_funct3is5_funct7.bexti -> ALUFunctions.bexti,
-              InstructionsTypeI_funct3is5_funct7.rori -> ALUFunctions.rori,
-              InstructionsTypeI_funct3is5_funct7.orcb -> ALUFunctions.orcb,
-              InstructionsTypeI_funct3is5_funct7.rev8 -> ALUFunctions.rev8,
+              InstructionsTypeI_funct3is5_funct7.rori  -> ALUFunctions.rori,
+              InstructionsTypeI_funct3is5_funct7.orcb  -> ALUFunctions.orcb,
+              InstructionsTypeI_funct3is5_funct7.rev8  -> ALUFunctions.rev8,
             )
           )
         ),
@@ -77,13 +77,15 @@ class ALUControl extends Module {
         ALUFunctions.zero,
         IndexedSeq(
           InstructionsTypeR.add_sub -> Mux(io.funct7(5), ALUFunctions.sub, ALUFunctions.add),
-          InstructionsTypeR.sll     -> ALUFunctions.sll,
-          InstructionsTypeR.slt     -> ALUFunctions.slt,
-          InstructionsTypeR.sltu    -> ALUFunctions.sltu,
-          InstructionsTypeR.xor     -> ALUFunctions.xor,
-          InstructionsTypeR.or      -> ALUFunctions.or,
-          InstructionsTypeR.and     -> ALUFunctions.and,
-          InstructionsTypeR.sr      -> Mux(io.funct7(5), ALUFunctions.sra, ALUFunctions.srl)
+
+          // 要改
+          InstructionsTypeR.sll_and_B_extension     -> ALUFunctions.sll,
+          InstructionsTypeR.slt_and_B_extension     -> ALUFunctions.slt,
+          InstructionsTypeR.sltu_and_B_extension    -> ALUFunctions.sltu,
+          InstructionsTypeR.xor_and_B_extension     -> ALUFunctions.xor,
+          InstructionsTypeR.or_and_B_extension      -> ALUFunctions.or,
+          InstructionsTypeR.and_and_B_extension     -> ALUFunctions.and,
+          InstructionsTypeR.srl_sra_and_B_extension -> Mux(io.funct7(5), ALUFunctions.sra, ALUFunctions.srl)
         ),
       )
     }

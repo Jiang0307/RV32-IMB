@@ -78,8 +78,9 @@ object InstructionsTypeR_funct3is4_funct7is4_rs2 {
   val zexth = "b00000".U
 }
 
-// 
+// sll_and_B_extension
 object InstructionsTypeR_funct3is1_funct7 {
+  val sll   = "b0000000".U
   val clmul = "b0000101".U
   val bset  = "b0010100".U
   val bclr  = "b0100100".U
@@ -87,34 +88,47 @@ object InstructionsTypeR_funct3is1_funct7 {
   val binv  = "b0110100".U
 }
 
+// slt_and_B_extension
 object InstructionsTypeR_funct3is2_funct7 {
+  val slt    = "b0000000".U
   val clmulr = "b0000101".U
   val sh1add = "b0010000".U
 }
 
+// sltu_and_B_extension
 object InstructionsTypeR_funct3is3_funct7 {
-  val clmulh = "b0000101"
+  val sltu   = "b0000000".U
+  val clmulh = "b0000101".U
 }
 
+// xor_and_B_extension
 object InstructionsTypeR_funct3is4_funct7 {
+  val xor    = "b0000000".U
   val min    = "b0000101".U
   val sh2add = "b0010000".U
   val xnor   = "b0100000".U
 }
 
+// srl_sra_and_B_extension
 object InstructionsTypeR_funct3is5_funct7 {
+  val srl  = "b0000000".U
+  val sra  = "b0100000".U
   val minu = "b0000101".U
   val bext = "b0100100".U
   val ror  = "b0110000".U
 }
 
+// or_and_B_extension
 object InstructionsTypeR_funct3is6_funct7 {
+  val or      = "b0000000".U
   val max     = "b0000101".U
   val sh3add  = "b0010000".U
   val orn     = "b0100000".U
 }
 
+// and_and_B_extension
 object InstructionsTypeR_funct3is7_funct7 {
+  val and  = "b0000000".U
   val maxu = "b0000101".U
   val andn = "b0100000".U
 }
@@ -129,13 +143,13 @@ object InstructionsTypeS {
 //funct3
 object InstructionsTypeR {
   val add_sub = 0.U
-  val sll     = 1.U
-  val slt     = 2.U
-  val sltu    = 3.U
-  val xor     = 4.U
-  val sr      = 5.U
-  val or      = 6.U
-  val and     = 7.U
+  val sll_and_B_extension     = 1.U // ++
+  val slt_and_B_extension     = 2.U // +++
+  val sltu_and_B_extension    = 3.U // +++
+  val xor_and_B_extension     = 4.U // +++
+  val srl_sra_and_B_extension = 5.U // +++
+  val or_and_B_extension      = 6.U // +++
+  val and_and_B_extension     = 7.U // +++
 }
 
 //funct3
