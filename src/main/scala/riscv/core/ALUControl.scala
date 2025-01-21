@@ -64,7 +64,7 @@ class ALUControl extends Module {
               )
             )
           ),
-          InstructionsTypeI.srli_and_B_extension -> MuxLookup(
+          InstructionsTypeI.srli_srai_and_B_extension -> MuxLookup(
             io.funct7,
             ALUFunctions.zero,
             IndexedSeq(

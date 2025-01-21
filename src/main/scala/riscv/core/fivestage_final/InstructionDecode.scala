@@ -40,7 +40,7 @@ object InstructionsTypeI {
   val slti  = 2.U
   val sltiu = 3.U
   val xori  = 4.U
-  val srli_and_B_extension   = 5.U //
+  val srli_srai_and_B_extension   = 5.U //
   val ori   = 6.U
   val andi  = 7.U
 }
