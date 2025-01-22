@@ -100,10 +100,10 @@ class ALU extends Module {
       io.result := PopCount(io.op1)
     }
     is(ALUFunctions.sextb) {
-      io.result := io.op1(7, 0).asSInt.asUInt
+      io.result := Cat(Fill(24, io.op1(7)), io.op1(7, 0))
     }
     is(ALUFunctions.sexth) {
-      io.result := io.op1(15, 0).asSInt.asUInt
+      io.result := Cat(Fill(16, io.op1(15)), io.op1(15, 0))
     }
     is(ALUFunctions.bseti) {
       io.result := io.op1 | (1.U << io.op2(4, 0))

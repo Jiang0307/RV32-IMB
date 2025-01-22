@@ -172,7 +172,6 @@ int main()
     print_timer();
     print_uart();
     *((int *) 0x4) = 0xDEADBEEF;
-    unsigned int i = 0;
     enable_interrupt();
     for (;;)
         ;

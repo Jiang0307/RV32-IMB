@@ -2,8 +2,8 @@ CROSS_COMPILE ?= riscv-none-elf-
 
 # ASFLAGS = -march=rv32i_zicsr -mabi=ilp32
 # CFLAGS = -O0 -Wall -march=rv32i_zicsr -mabi=ilp32
-ASFLAGS = -march=rv32i_zicsr_zbb_zbkb_zbkc_zbkx_zbs -mabi=ilp32
-CFLAGS = -O0 -Wall -march=rv32i_zicsr_zbb_zbkb_zbkc_zbkx_zbs -mabi=ilp32
+ASFLAGS = -march=rv32i_zicsr_zba_zbb_zbc_zbs  -mabi=ilp32
+CFLAGS = -O0 -Wall -march=rv32i_zicsr_zba_zbb_zbc_zbs  -mabi=ilp32
 LDFLAGS = --oformat=elf32-littleriscv
 
 AS := $(CROSS_COMPILE)as
@@ -33,7 +33,11 @@ BINS = \
 	clz.asmbin\
 	bseti.asmbin\
 	orcb.asmbin\
-	rev8.asmbin
+	rev8.asmbin\
+	zba.asmbin\
+	zbb.asmbin\
+	zbc.asmbin\
+	zbkb.asmbin
 
 # Clear the .DEFAULT_GOAL special variable, so that the following turns
 # to the first target after .DEFAULT_GOAL is not set.
