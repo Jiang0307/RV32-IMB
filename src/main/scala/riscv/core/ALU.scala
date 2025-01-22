@@ -43,7 +43,6 @@ class ALU extends Module {
     for (i <- 1 until 32) {
       partialResults(i) := partialResults(i - 1) ^ Mux(op2(i), op1 << i, 0.U)
     }
-
     partialResults(31)(63, 32) // 最後的結果
   }
 
