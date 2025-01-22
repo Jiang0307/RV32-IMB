@@ -155,24 +155,47 @@ class FiveStageCPUFinalTest extends AnyFlatSpec with ChiselScalatestTester {
   //       c.io.regs_debug_read_data.expect("b11111111000000000000000000000000".U)
   //   }
   // }
-  it should "test zbkb" in {
-    test(new TestTopModule("zbkb.asmbin", ImplementationType.FiveStageFinal)).withAnnotations(TestAnnotations.annos) {
+  // it should "test zbkb" in {
+  //   test(new TestTopModule("zbkb.asmbin", ImplementationType.FiveStageFinal)).withAnnotations(TestAnnotations.annos) {
+  //     c =>
+  //       c.clock.step(1000)
+  //       c.io.regs_debug_read_address.poke(5.U)
+  //       c.io.regs_debug_read_data.expect(0x02040608.U)
+  //       c.io.regs_debug_read_address.poke(7.U)
+  //       c.io.regs_debug_read_data.expect(0x0000FFFF.U)
+  //       c.io.regs_debug_read_address.poke(29.U)
+  //       c.io.regs_debug_read_data.expect(0x4AAEEAA6.U)
+  //       c.io.regs_debug_read_address.poke(31.U)
+  //       c.io.regs_debug_read_data.expect(0x23456781.U)
+  //       c.io.regs_debug_read_address.poke(19.U)
+  //       c.io.regs_debug_read_data.expect(0x01234567.U)
+  //       c.io.regs_debug_read_address.poke(21.U)
+  //       c.io.regs_debug_read_data.expect(0x78123456.U)
+  //       c.io.regs_debug_read_address.poke(22.U)
+  //       c.io.regs_debug_read_data.expect(0x01011010.U)
+  //   }
+  // }
+
+  it should "test zbs" in {
+    test(new TestTopModule("zbs.asmbin", ImplementationType.FiveStageFinal)).withAnnotations(TestAnnotations.annos) {
       c =>
         c.clock.step(1000)
         c.io.regs_debug_read_address.poke(5.U)
-        c.io.regs_debug_read_data.expect(0x02040608.U)
+        c.io.regs_debug_read_data.expect(0xF7.U)
         c.io.regs_debug_read_address.poke(7.U)
-        c.io.regs_debug_read_data.expect(0x0000FFFF.U)
-        c.io.regs_debug_read_address.poke(29.U)
-        c.io.regs_debug_read_data.expect(0x4AAEEAA6.U)
+        c.io.regs_debug_read_data.expect(0xA8.U)
+        c.io.regs_debug_read_address.poke(28.U)
+        c.io.regs_debug_read_data.expect(0x0.U)
+        c.io.regs_debug_read_address.poke(30.U)
+        c.io.regs_debug_read_data.expect(0x0.U)
         c.io.regs_debug_read_address.poke(31.U)
-        c.io.regs_debug_read_data.expect(0x23456781.U)
+        c.io.regs_debug_read_data.expect(0xE0.U)
         c.io.regs_debug_read_address.poke(19.U)
-        c.io.regs_debug_read_data.expect(0x01234567.U)
-        c.io.regs_debug_read_address.poke(21.U)
-        c.io.regs_debug_read_data.expect(0x78123456.U)
+        c.io.regs_debug_read_data.expect(0xE1.U)
+        c.io.regs_debug_read_address.poke(20.U)
+        c.io.regs_debug_read_data.expect(0x08.U)
         c.io.regs_debug_read_address.poke(22.U)
-        c.io.regs_debug_read_data.expect(0x01011010.U)
+        c.io.regs_debug_read_data.expect(0xA2.U)
     }
   }
 

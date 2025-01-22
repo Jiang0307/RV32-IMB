@@ -36,8 +36,9 @@ BINS = \
 	rev8.asmbin\
 	zba.asmbin\
 	zbb.asmbin\
+	zbkb.asmbin\
 	zbc.asmbin\
-	zbkb.asmbin
+	zbs.asmbin
 
 # Clear the .DEFAULT_GOAL special variable, so that the following turns
 # to the first target after .DEFAULT_GOAL is not set.
